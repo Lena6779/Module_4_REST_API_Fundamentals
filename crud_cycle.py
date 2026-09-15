@@ -3,6 +3,20 @@ import json
 
 BASE_URL = "https://jsonplaceholder.typicode.com/todos"
 
+# NOTE on design choice:
+# The assignment says step 2 (READ) should use the ID returned by the POST
+# in step 1. However, JSONPlaceholder is a mock API - it accepts POST
+# requests and returns a realistic-looking response (including a fake new
+# ID, usually 201), but it never actually saves the new resource. That
+# means a GET on that fake ID would just return 404, and every step after
+# it (UPDATE, READ AGAIN, DELETE, VERIFY) would fail the same way.
+#
+# To keep the rest of the CRUD cycle demonstrable against real data, this
+# script instead runs steps 2-6 against todo ID 1, one of JSONPlaceholder's
+# 200 pre-seeded todos that actually exists. This shows realistic 200
+# responses for READ/UPDATE/DELETE, at the cost of not literally reusing
+# the ID from step 1's response.
+
 # Step 1: CREATE 
 # Create a new todo 
 new_todo = {
